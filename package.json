@@ -1,0 +1,23 @@
+{
+  "name": "reference_auto_citing",
+  "version": "1.0.0",
+  "description": "reference auto citing program for word add in",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kathryn-choi/reference_auto_citing.git"
+  },
+  "author": "Kathryn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kathryn-choi/reference_auto_citing/issues"
+  },
+  "homepage": "https://github.com/kathryn-choi/reference_auto_citing#readme",
+  "dependencies": {
+    "generator-office": "^1.4.0",
+    "yo": "^3.1.0"
+  }
+}
