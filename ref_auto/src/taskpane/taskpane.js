@@ -6,6 +6,7 @@
 /* global document, Office, Word */
 
 var input_id_list = [1];
+var input_dict = {};
 
 Office.onReady(info => {
   if (info.host === Office.HostType.Word) {
@@ -18,7 +19,7 @@ Office.onReady(info => {
       
           x++; //text box increment
           input_id_list.push(x);
-          $(wrapper).append('<div><br>author : <input type = "text" id = "author_'+x.toString()+'"><br> name : <input type = "text" id = "name_'+x.toString()+'"><br>keyword : \
+          $(wrapper).append('<div><br> name : <input type = "text" id = "name_'+x.toString()+'"><br>author : <input type = "text" id = "author_'+x.toString()+'"><br>keyword : \
                             <input type = "text" id = "keyword_'+x.toString()+'"><a href="#" class="remove_field"> x </a></div>'); //add input box
       
     });
@@ -43,23 +44,65 @@ Office.onReady(info => {
     // Assign event handlers and other initialization logic.
 
     document.getElementById("send").onclick = replace_text_multi;
+    document.getElementById("test").onclick = test;
   }
 });
+
+function test(){
+  Word.run(function(context) {
+    // Insert your code here. For example:
+    var documentBody = context.document.body;
+    context.load(documentBody);
+   
+    var author = document.getElementById("author_1").value;
+    if(author.length != 0) {
+      for(var i =0; i<input_id_list.length; i++)
+        input_dict[input_id_list[i]] = [i+1];
+    }
+    return context.sync()
+    .then(function(){
+        var text = documentBody.text;
+        var index_list = [];
+        for(var i=0; i<input_id_list.length; i++){
+          var index = text.indexOf('['+(i+1).toString()+']')
+          input_dict[input_id_list[i]].push(index);
+          index_list.push(index);
+        }
+        index_list.sort(function(a,b){
+          return a-b;
+        })
+        for(var i=0; i<index_list.length; i++){
+          for(var j=0; j<input_id_list.length; j++){
+            if(input_dict[input_id_list[j]][1] == index_list[i]){
+              if(input_dict[input_id_list[j]][0] != i+1){
+                replace_num(input_dict[input_id_list[j]][0], (i+1));
+              }
+            }
+          }
+        }
+    })
+  });
+}
 
 function replace_text_multi(){
   for(var i =0; i<input_id_list.length; i++){
     var author = document.getElementById("author_"+input_id_list[i].toString()).value;
     // var name = document.getElementById("name_"+input_id_list[i].toString()).value;
-    var keyword = document.getElementById("keyword_"+input_id_list[i].toString()).value;
-    var keyword_list = keyword.split(',')
-    replace_text(author,i)
+    if(author.length != 0) {
+      replace_text(author,i);
+      input_dict[input_id_list[i]] = [i+1];
+    }
     // replace_text(name,i)
-    for(var j=0; j<keyword_list.length; j++){
-      replace_text(keyword_list[j],i)
+    var keyword = document.getElementById("keyword_"+input_id_list[i].toString()).value;
+    if(keyword.length != 0){
+      var keyword_list = keyword.split(',')
+      for(var j=0; j<keyword_list.length; j++){
+        replace_text(keyword_list[j],i)
+      }
     }
   }
 }
-//m_objectPath.m_objectPathInfo.id  
+
 function replace_text(text,index){
   Word.run(function (ctx) {
     // Queue a command to search the document for the string "Contoso".
@@ -88,3 +131,30 @@ function replace_text(text,index){
   });
 }
 
+function replace_num(from_num, to_num){
+  Word.run(function (ctx) {
+    // Queue a command to search the document for the string "Contoso".
+    // Create a proxy search results collection object.
+    var results = ctx.document.body.search('['+from_num.toString()+']');      //Search for the text to replace
+    
+    // Queue a command to load all of the properties on the search results collection object.
+    ctx.load(results, 'range');
+
+    // Synchronize the document state by executing the queued commands,
+    // and returning a promise to indicate task completion.
+    return ctx.sync().then(function () {
+      for (var i = 0; i < results.items.length; i++) {
+        results.items[i].insertText('['+to_num.toString()+']',"replace");
+      }
+    })
+    // Synchronize the document state by executing the queued commands.
+    .then(ctx.sync)
+    .catch(function (error) {
+      console.log("Error: " + error);
+      if (error instanceof OfficeExtension.Error) {
+          console.log("Debug info: " + JSON.stringify(error.debugInfo));
+      }
+  });
+
+  });
+}
