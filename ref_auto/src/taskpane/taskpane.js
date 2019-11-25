@@ -11,18 +11,18 @@ var input_dict = {};
 Office.onReady(info => {
   if (info.host === Office.HostType.Word) {
     var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
+    // var add_button      = $(".add_field_button"); //Add button ID
     
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-      e.preventDefault();
+    // var x = 1; //initlal text box count
+    // $(add_button).click(function(e){ //on add input button click
+    //   e.preventDefault();
       
-          x++; //text box increment
-          input_id_list.push(x);
-          $(wrapper).append('<div><br> name : <input type = "text" id = "name_'+x.toString()+'"><br>author : <input type = "text" id = "author_'+x.toString()+'"><br>keyword : \
-                            <input type = "text" id = "keyword_'+x.toString()+'"><a href="#" class="remove_field"> x </a></div>'); //add input box
+    //       x++; //text box increment
+    //       input_id_list.push(x);
+    //       $(wrapper).append('<div><br> name &nbsp&nbsp&nbsp&nbsp: <input type = "text" id = "name_'+x.toString()+'"><br>author&nbsp&nbsp&nbsp : <input type = "text" id = "author_'+x.toString()+'"><br>keyword : \
+    //                         <input type = "text" id = "keyword_'+x.toString()+'"><a href="#" class="remove_field"> x </a></div>'); //add input box
       
-    });
+    // });
     
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
       console.log(e);
@@ -33,7 +33,13 @@ Office.onReady(info => {
       if (idx > -1) input_id_list.splice(idx, 1)
       console.log(input_id_list)
       e.preventDefault(); $(this).parent('div').remove(); 
+      e.preventDefault(); $(this).parent('div').remove(); 
+      e.preventDefault(); $(this).parent('div').remove(); 
+      e.preventDefault(); $(this).parent('div').remove(); 
     })
+
+    document.getElementById("add").onclick = education_fields;
+
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     // Determine if the user's version of Office supports all the Office.js APIs that are used in the tutorial.
@@ -44,9 +50,24 @@ Office.onReady(info => {
     // Assign event handlers and other initialization logic.
 
     document.getElementById("send").onclick = replace_text_multi;
-    document.getElementById("test").onclick = test;
+    document.getElementById("rearrange").onclick = test;
   }
 });
+var x = 1;
+function education_fields() {
+  x++; //text box increment
+  input_id_list.push(x);
+  var wrapper = $(".input_fields_wrap"); 
+  $(wrapper).append(
+    '<div><div class="form-group"><hr>Name : &nbsp;&nbsp;&nbsp;&nbsp; <input type = "text" id = "name_'+x.toString()+'"><br>\
+    </div><div class="form-group">Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_'+x.toString()+'"><br>\
+    </div>Keyword : <input type = "text" id = "keyword_'+x.toString()+'">\
+   <a href="#" class="remove_field"> x </a><br></div>'); //add input box
+      
+}
+function remove_education_fields(rid) {
+	 $('.removeclass'+rid).remove();
+}
 
 function test(){
   Word.run(function(context) {
