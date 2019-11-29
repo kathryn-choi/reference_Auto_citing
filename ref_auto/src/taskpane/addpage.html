@@ -1,0 +1,74 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+
+
+ >
+ <script language="javascript">
+        /* function showPopup() { window.open("popup.html", "add", "width=400, height=300, left=100, top=50"); } */
+        function go_back() { location.href="javascript:history.back()"; }
+</script>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    <script type="text/javascript" src="addpage.js"></script>
+
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+    <section id="sideload-msg" class="ms-welcome__main">
+        <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
+    </section>
+    <main id = "app-body">
+        <div class="container">
+            <div class="input_fields_wrap">
+            
+                <div class="form-group">
+                    Name : &nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" id = "name_1"><br>
+                </div>
+            
+                <div class="form-group">
+                        Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_1"><br>
+                </div>
+                <div class="form-group">
+                        Published in : &nbsp;<input type = "text" id = "publish_1"><br>
+                </div>
+                <div class="form-group">
+                        Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_1"><br>
+                </div>
+                <div class="form-group">
+                        Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_1"><br>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                    Keyword : <input type = "text" id = "keyword_1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+        <div class = "container">
+            <div class="btn-group">
+                    <button class="btn-group btn-success" type="button" id="plus_paper">submit</button><br/><br/>
+                    <button class="btn-group btn-success" type="button" id="exit" onclick="go_back();">exit</button><br/><br/>
+            </div><br>
+        </div>
+    </main>
+</body>
+
+</html>
