@@ -48,9 +48,7 @@ Office.onReady(info => {
     }
 
     // Assign event handlers and other initialization logic.
-
     document.getElementById("send").onclick = replace_text_multi;
-    document.getElementById("rearrange").onclick = test;
   }
 });
 var x = 1;
@@ -61,48 +59,15 @@ function education_fields() {
   $(wrapper).append(
     '<div><div class="form-group"><hr>Name : &nbsp;&nbsp;&nbsp;&nbsp; <input type = "text" id = "name_'+x.toString()+'"><br>\
     </div><div class="form-group">Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_'+x.toString()+'"><br>\
+    </div><div class="form-group">Published in : &nbsp;<input type = "text" id = "publish_'+x.toString()+'"><br>\
+    </div><div class="form-group">Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_'+x.toString()+'"><br>\
+    </div><div class="form-group">Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_'+x.toString()+'"><br>\
     </div>Keyword : <input type = "text" id = "keyword_'+x.toString()+'">\
    <a href="#" class="remove_field"> x </a><br></div>'); //add input box
       
 }
 function remove_education_fields(rid) {
 	 $('.removeclass'+rid).remove();
-}
-
-function test(){
-  Word.run(function(context) {
-    // Insert your code here. For example:
-    var documentBody = context.document.body;
-    context.load(documentBody);
-   
-    var author = document.getElementById("author_1").value;
-    if(author.length != 0) {
-      for(var i =0; i<input_id_list.length; i++)
-        input_dict[input_id_list[i]] = [i+1];
-    }
-    return context.sync()
-    .then(function(){
-        var text = documentBody.text;
-        var index_list = [];
-        for(var i=0; i<input_id_list.length; i++){
-          var index = text.indexOf('['+(i+1).toString()+']')
-          input_dict[input_id_list[i]].push(index);
-          index_list.push(index);
-        }
-        index_list.sort(function(a,b){
-          return a-b;
-        })
-        for(var i=0; i<index_list.length; i++){
-          for(var j=0; j<input_id_list.length; j++){
-            if(input_dict[input_id_list[j]][1] == index_list[i]){
-              if(input_dict[input_id_list[j]][0] != i+1){
-                replace_num(input_dict[input_id_list[j]][0], (i+1));
-              }
-            }
-          }
-        }
-    })
-  });
 }
 
 function replace_text_multi(){
@@ -122,6 +87,10 @@ function replace_text_multi(){
       }
     }
   }
+  localStorage.myIndexData=JSON.stringify(input_id_list);
+  localStorage.myDicData=JSON.stringify(input_dict);
+  insert_references();
+  location.href="src/taskpane/afterinsert.html";
 }
 
 function replace_text(text,index){
@@ -152,30 +121,48 @@ function replace_text(text,index){
   });
 }
 
-function replace_num(from_num, to_num){
-  Word.run(function (ctx) {
-    // Queue a command to search the document for the string "Contoso".
-    // Create a proxy search results collection object.
-    var results = ctx.document.body.search('['+from_num.toString()+']');      //Search for the text to replace
-    
-    // Queue a command to load all of the properties on the search results collection object.
-    ctx.load(results, 'range');
 
-    // Synchronize the document state by executing the queued commands,
-    // and returning a promise to indicate task completion.
-    return ctx.sync().then(function () {
-      for (var i = 0; i < results.items.length; i++) {
-        results.items[i].insertText('['+to_num.toString()+']',"replace");
-      }
-    })
-    // Synchronize the document state by executing the queued commands.
-    .then(ctx.sync)
-    .catch(function (error) {
+
+function insert_references(){
+  
+  Word.run(function (context) {
+    var ref_array = [];
+    for(var i =0; i<input_id_list.length; i++){
+      var docBody = context.document.body;
+      
+      var author = document.getElementById("author_"+input_id_list[i].toString()).value;
+      var name = document.getElementById("name_"+input_id_list[i].toString()).value;
+      var author_list = author.split(',');
+      var publised_in = document.getElementById("publish_"+input_id_list[i].toString()).value;
+      var pages = document.getElementById("page_"+input_id_list[i].toString()).value;
+      var year = document.getElementById("year_"+input_id_list[i].toString()).value;
+      var ref_string = "";
+      
+      //ref_string += (i+1).toString() + "] ";
+      //docBody.insertText(author + ", ", "End");
+      for(var j=0; j<author_list.length; j++){
+        //docBody.insertText(author_list[j],"End");
+        ref_string += author_list[j];
+        if((author_list.length != 1) && j == author_list.length -2){
+          ref_string += " and ";
+        }
+        else{
+          ref_string += ", "
+        }
+      } 
+      
+      ref_string += '"' + name + '," in ' + publised_in + ", " + year + ". pp. " + pages +"."
+      docBody.insertParagraph(ref_string,"End");
+      ref_array.push(ref_string) ;
+      localStorage.myArrData=JSON.stringify(ref_array);
+    }
+
+    return context.sync();
+  })
+  .catch(function (error) {
       console.log("Error: " + error);
       if (error instanceof OfficeExtension.Error) {
           console.log("Debug info: " + JSON.stringify(error.debugInfo));
       }
-  });
-
   });
 }

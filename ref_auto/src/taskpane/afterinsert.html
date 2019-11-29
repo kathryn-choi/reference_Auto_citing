@@ -9,7 +9,10 @@
 
 
  >
-
+<script language="javascript">
+    /* function showPopup() { window.open("popup.html", "add", "width=400, height=300, left=100, top=50"); } */
+    function showPopup() { location.href="addpage.html"; }
+</script>
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -18,6 +21,7 @@
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    <script type="text/javascript" src="afterinsert.js"></script>
 
     <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
@@ -37,39 +41,14 @@
     <main id = "app-body">
         <div class = "container">
         <div class="btn-group">
-                <button class="btn-group btn-success" type="button" id = "add">+</span> </button>
-                <button class="btn-group btn-success" type="button" id="send">insert</button><br/><br/>
-                <select name="cite_type" class="select-field">
-                    <option value="IEEE">IEEE</option>
-                    <option value="APA">APA</option>
-                    <option value="ACS ">ACS</option>
-                </select><br/><br/>
+                <!-- <button class="btn-group btn-success" type="button" id="insertparagraph">insert</button><br/><br/> -->
+                <button class="btn-group btn-success" type="button" id="rearrange">rearrange</button>
+                <button class="btn-group btn-success" type="button" id="popup" onclick="showPopup();">add reference</button>
         </div>
         <br>
         <div class="container">
             <div class="input_fields_wrap">
-            
-                <div class="form-group">
-                    Name : &nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" id = "name_1"><br>
-                </div>
-            
-                <div class="form-group">
-                        Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_1"><br>
-                </div>
-                <div class="form-group">
-                        Published in : &nbsp;<input type = "text" id = "publish_1"><br>
-                </div>
-                <div class="form-group">
-                        Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_1"><br>
-                </div>
-                <div class="form-group">
-                        Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_1"><br>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                    Keyword : <input type = "text" id = "keyword_1">
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
