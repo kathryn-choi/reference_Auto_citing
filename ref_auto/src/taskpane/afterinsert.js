@@ -19,12 +19,12 @@ Office.initialize = function () {
 
     // Assign event handlers and other initialization logic.
     document.getElementById("rearrange").onclick = test;
-    insertParagraph();
+    insertRefList();
 };
 var x = 1;
 
 
-function insertParagraph() {
+function insertRefList() {
     Word.run(function (context) {
         var wrapper = $(".input_fields_wrap");
         $(wrapper).empty();
@@ -73,20 +73,24 @@ function test(){
           for(var i=0; i<index_list.length; i++){
             for(var j=0; j<input_id_list.length; j++){
               if(input_dict[input_id_list[j]][1] == index_list[i]){
+                input_dict[input_id_list[j]].push(i);
                 if(input_dict[input_id_list[j]][0] != i+1){
-                  /* console.log(ref_array[i]);
-                  var temp = ref_array[input_dict[input_id_list[j]][0]-1];
-                  ref_array[input_dict[input_id_list[j]][0]-1] = ref_array[i];
-                  ref_array[i] = temp;
-                  console.log(ref_array[i]); */
                   replace_num(input_dict[input_id_list[j]][0], (i+1));
                 }
               }
             }
           }
+          for(i=0; i<input_id_list.length; i++){
+            for(j=0; j<input_id_list.length; j++){
+               if(input_dict[input_id_list[j]][2] == i){
+                documentBody.insertParagraph("["+(i+1).toString() +"] " + ref_array[j],"End");
+               }
+             }
+           }
       })
     });
   }
+  
 
   function replace_num(from_num, to_num){
     Word.run(function (ctx) {
@@ -135,5 +139,5 @@ function test(){
       if (error instanceof OfficeExtension.Error) {
           console.log("Debug info: " + JSON.stringify(error.debugInfo));
       }
-    });
+    });  
 }

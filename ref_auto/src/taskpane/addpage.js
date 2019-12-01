@@ -48,8 +48,6 @@ function add_paper(){
     ref_string += '"' + name + '," in ' + publised_in + ", " + year + ". pp. " + pages +"."
     //docBody.insertParagraph(ref_string,"End");
     ref_array.push(ref_string) ;
-    console.log(ref_string);
-    console.log(input_dict.length)
     localStorage.myArrData=JSON.stringify(ref_array);
 
     var i = x-1;

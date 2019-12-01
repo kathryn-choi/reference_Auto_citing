@@ -95,11 +95,8 @@ function replace_text_multi(){
 
 function replace_text(text,index){
   Word.run(function (ctx) {
-    // Queue a command to search the document for the string "Contoso".
-    // Create a proxy search results collection object.
     var results = ctx.document.body.search(text, {matchWholeWord:true});      //Search for the text to replace
     
-    // Queue a command to load all of the properties on the search results collection object.
     ctx.load(results, 'range');
 
     // Synchronize the document state by executing the queued commands,
@@ -128,8 +125,6 @@ function insert_references(){
   Word.run(function (context) {
     var ref_array = [];
     for(var i =0; i<input_id_list.length; i++){
-      var docBody = context.document.body;
-      
       var author = document.getElementById("author_"+input_id_list[i].toString()).value;
       var name = document.getElementById("name_"+input_id_list[i].toString()).value;
       var author_list = author.split(',');
@@ -138,10 +133,7 @@ function insert_references(){
       var year = document.getElementById("year_"+input_id_list[i].toString()).value;
       var ref_string = "";
       
-      //ref_string += (i+1).toString() + "] ";
-      //docBody.insertText(author + ", ", "End");
       for(var j=0; j<author_list.length; j++){
-        //docBody.insertText(author_list[j],"End");
         ref_string += author_list[j];
         if((author_list.length != 1) && j == author_list.length -2){
           ref_string += " and ";
@@ -152,7 +144,6 @@ function insert_references(){
       } 
       
       ref_string += '"' + name + '," in ' + publised_in + ", " + year + ". pp. " + pages +"."
-      docBody.insertParagraph(ref_string,"End");
       ref_array.push(ref_string) ;
       localStorage.myArrData=JSON.stringify(ref_array);
     }
