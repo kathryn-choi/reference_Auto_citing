@@ -11,18 +11,6 @@ var input_dict = {};
 Office.onReady(info => {
   if (info.host === Office.HostType.Word) {
     var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
-    // var add_button      = $(".add_field_button"); //Add button ID
-    
-    // var x = 1; //initlal text box count
-    // $(add_button).click(function(e){ //on add input button click
-    //   e.preventDefault();
-      
-    //       x++; //text box increment
-    //       input_id_list.push(x);
-    //       $(wrapper).append('<div><br> name &nbsp&nbsp&nbsp&nbsp: <input type = "text" id = "name_'+x.toString()+'"><br>author&nbsp&nbsp&nbsp : <input type = "text" id = "author_'+x.toString()+'"><br>keyword : \
-    //                         <input type = "text" id = "keyword_'+x.toString()+'"><a href="#" class="remove_field"> x </a></div>'); //add input box
-      
-    // });
     
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
       console.log(e);
@@ -57,12 +45,12 @@ function education_fields() {
   input_id_list.push(x);
   var wrapper = $(".input_fields_wrap"); 
   $(wrapper).append(
-    '<div><div class="form-group"><hr>Name : &nbsp;&nbsp;&nbsp;&nbsp; <input type = "text" id = "name_'+x.toString()+'"><br>\
-    </div><div class="form-group">Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_'+x.toString()+'"><br>\
-    </div><div class="form-group">Published in : &nbsp;<input type = "text" id = "publish_'+x.toString()+'"><br>\
-    </div><div class="form-group">Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_'+x.toString()+'"><br>\
-    </div><div class="form-group">Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_'+x.toString()+'"><br>\
-    </div>Keyword : <input type = "text" id = "keyword_'+x.toString()+'">\
+    '<div><div class="form-group"><hr>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; <input type = "text" id = "name_'+x.toString()+'"><br>\
+    </div><div class="form-group"> Author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "author_'+x.toString()+'"><br>\
+    </div><div class="form-group"> Published in &nbsp;: &nbsp;<input type = "text" id = "publish_'+x.toString()+'"><br>\
+    </div><div class="form-group"> Pages   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type = "text" id = "page_'+x.toString()+'"><br>\
+    </div><div class="form-group"> Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "year_'+x.toString()+'"><br>\
+    </div> Keyword &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "keyword_'+x.toString()+'">\
    <a href="#" class="remove_field"> x </a><br></div>'); //add input box
       
 }
@@ -75,7 +63,10 @@ function replace_text_multi(){
     var author = document.getElementById("author_"+input_id_list[i].toString()).value;
     // var name = document.getElementById("name_"+input_id_list[i].toString()).value;
     if(author.length != 0) {
-      replace_text(author,i);
+      var author_list = author.split(',')
+      for(var j =0; j<author_list.length; j++){
+        replace_text(author_list[j],i);
+      }
       input_dict[input_id_list[i]] = [i+1];
     }
     // replace_text(name,i)

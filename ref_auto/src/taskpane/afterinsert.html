@@ -7,8 +7,6 @@
 
 <!DOCTYPE html>
 
-
- >
 <script language="javascript">
     /* function showPopup() { window.open("popup.html", "add", "width=400, height=300, left=100, top=50"); } */
     function showPopup() { location.href="addpage.html"; }
@@ -40,15 +38,18 @@
     </section>
     <main id = "app-body">
         <div class = "container">
-        <div class="btn-group">
-                <!-- <button class="btn-group btn-success" type="button" id="insertparagraph">insert</button><br/><br/> -->
-                <button class="btn-group btn-success" type="button" id="rearrange">rearrange</button>
-                <button class="btn-group btn-success" type="button" id="popup" onclick="showPopup();">add reference</button>
+        <div class="btn-group" style="position: absolute; left: 15;">
+            <br>
+            <button class="btn btn-info btn-xs" type="button" id="rearrange" data-tooltip-text="Rearrange number. EX) 5,2,3,1,4 -> 1,2,3,4,5">Rearrange</button>
+            <button class="btn btn-info btn-xs" type="button" id="popup" data-tooltip-text="Add more paper" onclick="showPopup();">Add reference</button>
+            <!-- <button class="btn btn-danger btn-xs" type="button" id="final_button" title="Insert Refernece. This button is for one time. Only use when you finish your paper.">Write Refernce</button> -->
         </div>
         <br>
         <div class="container">
-            <div class="input_fields_wrap">
-                
+            <div style="overflow:scroll; width:500px; height:600px;" >
+                <div class="input_fields_wrap">
+                    
+                </div>
             </div>
         </div>
     </div>

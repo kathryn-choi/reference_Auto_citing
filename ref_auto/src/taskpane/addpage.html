@@ -7,8 +7,6 @@
 
 <!DOCTYPE html>
 
-
- >
  <script language="javascript">
         /* function showPopup() { window.open("popup.html", "add", "width=400, height=300, left=100, top=50"); } */
         function go_back() { location.href="javascript:history.back()"; }
@@ -37,38 +35,43 @@
     <main id = "app-body">
         <div class="container">
             <div class="input_fields_wrap">
-            
+                <br>
+                <div class = "container">
+                    <div class="btn-group" style="position: absolute; left: 15;">
+                        <button class="btn btn-info btn-xs" type="button" id="plus_paper" data-tooltip-text="Add paper info">Add</button>
+                        <button class="btn btn-info btn-xs" type="button" id="exit" data-tooltip-text="Go back to the previous page" onclick="go_back();">back</button><br/><br/>
+                    </div><br><br>
+                </div>
                 <div class="form-group">
-                    Name : &nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" id = "name_1"><br>
+                    Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type = "text" id = "name_1"><br>
                 </div>
             
                 <div class="form-group">
-                        Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_1"><br>
+                        Author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "author_1"><br>
                 </div>
                 <div class="form-group">
-                        Published in : &nbsp;<input type = "text" id = "publish_1"><br>
+                        Published in &nbsp;: &nbsp;<input type = "text" id = "publish_1"><br>
                 </div>
                 <div class="form-group">
-                        Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_1"><br>
+                        Pages   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type = "text" id = "page_1"><br>
                 </div>
                 <div class="form-group">
-                        Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_1"><br>
+                        Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "year_1"><br>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                    Keyword : <input type = "text" id = "keyword_1">
+                    Keyword &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "keyword_1">
                     </div>
                 </div>
             </div>
+            <br/><br/>
+            
         </div>
-        <br/><br/>
-        <div class = "container">
-            <div class="btn-group">
-                    <button class="btn-group btn-success" type="button" id="plus_paper">submit</button><br/><br/>
-                    <button class="btn-group btn-success" type="button" id="exit" onclick="go_back();">exit</button><br/><br/>
-            </div><br>
-        </div>
+        
+      
+        
     </main>
 </body>
 
 </html>
+

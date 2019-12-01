@@ -7,9 +7,6 @@
 
 <!DOCTYPE html>
 
-
- >
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -36,9 +33,10 @@
     </section>
     <main id = "app-body">
         <div class = "container">
+        <br>
         <div class="btn-group">
-                <button class="btn-group btn-success" type="button" id = "add">+</span> </button>
-                <button class="btn-group btn-success" type="button" id="send">insert</button><br/><br/>
+                <button class="btn btn-info btn-xs" type="button" id = "add" data-tooltip-text="Add more field for paper info">+</button>
+                <button class="btn btn-info btn-xs" type="button" id="send" data-tooltip-text="Insert number in the body">insert</button>&nbsp;&nbsp;
                 <select name="cite_type" class="select-field">
                     <option value="IEEE">IEEE</option>
                     <option value="APA">APA</option>
@@ -46,35 +44,40 @@
                 </select><br/><br/>
         </div>
         <br>
-        <div class="container">
-            <div class="input_fields_wrap">
-            
-                <div class="form-group">
-                    Name : &nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" id = "name_1"><br>
-                </div>
-            
-                <div class="form-group">
-                        Author : &nbsp;&nbsp;&nbsp;<input type = "text" id = "author_1"><br>
-                </div>
-                <div class="form-group">
-                        Published in : &nbsp;<input type = "text" id = "publish_1"><br>
-                </div>
-                <div class="form-group">
-                        Pages : &nbsp;&nbsp;&nbsp;<input type = "text" id = "page_1"><br>
-                </div>
-                <div class="form-group">
-                        Year : &nbsp;&nbsp;&nbsp;<input type = "text" id = "year_1"><br>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                    Keyword : <input type = "text" id = "keyword_1">
+        <!-- <div class = "item-loading-queue"> -->
+            <div class="container">
+                <div style="overflow:scroll; width:500px; height:600px;" >
+                    <div class="input_fields_wrap">
+                    
+                        <div class="form-group">
+                            Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type = "text" id = "name_1"><br>
+                        </div>
+                    
+                        <div class="form-group">
+                                Author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "author_1"><br>
+                        </div>
+                        <div class="form-group">
+                                Published in &nbsp;: &nbsp;<input type = "text" id = "publish_1"><br>
+                        </div>
+                        <div class="form-group">
+                                Pages   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;<input type = "text" id = "page_1"><br>
+                        </div>
+                        <div class="form-group">
+                                Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "year_1"><br>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                Keyword &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<input type = "text" id = "keyword_1">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </main>
 
 </body>
 
 </html>
+
