@@ -34,16 +34,18 @@
     <main id = "app-body">
         <div class = "container">
         <br>
-        <div class="btn-group">
-                <button class="btn btn-info btn-xs" type="button" id = "add" data-tooltip-text="Add more field for paper info">+</button>
-                <button class="btn btn-info btn-xs" type="button" id="send" data-tooltip-text="Insert number in the body">insert</button>&nbsp;&nbsp;
-                <select name="cite_type" class="select-field">
+        
+        <button class="btn btn-info btn-xs" type="button" id = "add" data-tooltip-text="Add more field for paper info">+</button>
+        <button class="btn btn-danger btn-xs" type="button" id="send"  data-tooltip-text="Insert number in the body">insert</button>
+            
+        <div class="btn-group" style="position: absolute; right: 30;">
+            <select name="cite_type" class="select-field">
                     <option value="IEEE">IEEE</option>
                     <option value="APA">APA</option>
                     <option value="ACS ">ACS</option>
-                </select><br/><br/>
+            </select>&nbsp;&nbsp;
         </div>
-        <br>
+        <br><br>
         <!-- <div class = "item-loading-queue"> -->
             <div class="container">
                 <div style="overflow:scroll; width:500px; height:600px;" >

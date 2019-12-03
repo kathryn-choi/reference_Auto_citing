@@ -16,9 +16,10 @@ Office.initialize = function () {
     if (!Office.context.requirements.isSetSupported('WordApi', '1.3')) {
       console.log('Sorry. The tutorial add-in uses Word.js APIs that are not available in your version of Office.');
     }
-
+   
     // Assign event handlers and other initialization logic.
     document.getElementById("rearrange").onclick = test;
+    document.getElementById("final_button").onclick = finish;
     insertRefList();
 };
 var x = 1;
@@ -28,13 +29,22 @@ function insertRefList() {
     Word.run(function (context) {
         var wrapper = $(".input_fields_wrap");
         $(wrapper).empty();
-        for(var i = 0; i < ref_array.length; i++)
+        console.log(ref_array)
+        for(var i = 0; i < input_id_list.length; i++)
         {
-            //docBody.insertParagraph(ref_array[i],"End");
-            $(wrapper).append(
+          console.log(ref_array[input_id_list[i]][1].length);
+            if(ref_array[input_id_list[i]][1].length == 0){
+              $(wrapper).append(
                 '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' + (i+1).toString() + '\')">\
-                <span class="ms-Button-label">'+ref_array[i]+'</span>\
-            </div>');
+                <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[i]][0]+ '</span>\
+              </div>');
+            }
+            else{
+              $(wrapper).append(
+                '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' +  (i+1).toString() + '\')">\
+                <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[i]][0] + '<br>Keyword : '+ref_array[input_id_list[i]][1] + '</span>\
+              </div>');
+            }
         }
 
         return context.sync();
@@ -52,7 +62,6 @@ function test(){
       // Insert your code here. For example:
       var documentBody = context.document.body;
       context.load(documentBody);
-     
       //var author = document.getElementById("author_1").value;
       if(ref_array.length != 0) {
         for(var i =0; i<input_id_list.length; i++)
@@ -73,6 +82,7 @@ function test(){
           for(var i=0; i<index_list.length; i++){
             for(var j=0; j<input_id_list.length; j++){
               if(input_dict[input_id_list[j]][1] == index_list[i]){
+                // input_dict[input_id_list[j]][2] = i;
                 input_dict[input_id_list[j]].push(i);
                 if(input_dict[input_id_list[j]][0] != i+1){
                   replace_num(input_dict[input_id_list[j]][0], (i+1));
@@ -83,14 +93,41 @@ function test(){
           for(i=0; i<input_id_list.length; i++){
             for(j=0; j<input_id_list.length; j++){
                if(input_dict[input_id_list[j]][2] == i){
-                documentBody.insertParagraph("["+(i+1).toString() +"] " + ref_array[j],"End");
+                documentBody.insertParagraph("["+(i+1).toString() +"] " + ref_array[input_id_list[j]][0],"End");
                }
              }
            }
+           localStorage.myIndexData=JSON.stringify(input_id_list);
+           localStorage.myDicData=JSON.stringify(input_dict);
+           localStorage.myArrData=JSON.stringify(ref_array);
+      }).then(function(){
+        location.href="finish.html";
       })
     });
   }
   
+  function finish(){
+    Word.run(function (context) {
+      var documentBody = context.document.body;
+      context.load(documentBody);
+      console.log("hello");
+      for(i=0; i<input_id_list.length; i++){
+            for(j=0; j<input_id_list.length; j++){
+               if(input_dict[input_id_list[j]][2] == i){
+                documentBody.insertParagraph("["+(i+1).toString() +"] " + ref_array[input_id_list[j]][0],"End");
+               }
+             }
+          }
+      return context.sync()
+        .then(context.sync);
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+      if (error instanceof OfficeExtension.Error) {
+          console.log("Debug info: " + JSON.stringify(error.debugInfo));
+      }
+    });  
+  }
 
   function replace_num(from_num, to_num){
     Word.run(function (ctx) {

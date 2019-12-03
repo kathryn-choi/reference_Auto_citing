@@ -6,11 +6,6 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
-
-<script language="javascript">
-    /* function showPopup() { window.open("popup.html", "add", "width=400, height=300, left=100, top=50"); } */
-    function showPopup() { location.href="addpage.html"; }
-</script>
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -19,7 +14,7 @@
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-    <script type="text/javascript" src="afterinsert.js"></script>
+    <script type="text/javascript" src="finish.js"></script>
 
     <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
@@ -38,13 +33,6 @@
     </section>
     <main id = "app-body">
         <div class = "container">
-        <div class="btn-group" style="position: absolute; left: 15;">
-            <br>
-            <button class="btn btn-info btn-xs" type="button" id="rearrange" data-tooltip-text="Rearrange number. EX) 5,2,3,1,4 -> 1,2,3,4,5">Rearrange</button>
-            <button class="btn btn-info btn-xs" type="button" id="popup" data-tooltip-text="Add more paper" onclick="showPopup();">Add reference</button>
-            <button class="btn btn-danger btn-xs" type="button" id="final_button" title="Insert Refernece. This button is for one time. Only use when you finish your paper.">Write Refernce</button>
-        </div>
-        <br>
         <div class="container">
             <div style="overflow:scroll; width:500px; height:600px;" >
                 <div class="input_fields_wrap">

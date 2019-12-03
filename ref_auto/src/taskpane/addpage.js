@@ -8,7 +8,6 @@ var input_id_list = JSON.parse(localStorage.myIndexData);
 var input_dict = JSON.parse(localStorage.myDicData);
 var ref_array = JSON.parse(localStorage.myArrData);
 
-
 Office.initialize = function () {
   if (!Office.context.requirements.isSetSupported('WordApi', '1.3')) {
     console.log('Sorry. The tutorial add-in uses Word.js APIs that are not available in your version of Office.');
@@ -33,6 +32,7 @@ function add_paper(){
     var pages = document.getElementById("page_1").value;
     var year = document.getElementById("year_1").value;
     var ref_string = "";
+    var keyword = document.getElementById("keyword_1").value;
     
   
     for(var j=0; j<author_list.length; j++){
@@ -46,8 +46,8 @@ function add_paper(){
     } 
     
     ref_string += '"' + name + '," in ' + publised_in + ", " + year + ". pp. " + pages +"."
-    //docBody.insertParagraph(ref_string,"End");
-    ref_array.push(ref_string) ;
+    ref_array[x.toString()] = [ref_string] ;
+    ref_array[x.toString()].push(keyword);
     localStorage.myArrData=JSON.stringify(ref_array);
 
     var i = x-1;

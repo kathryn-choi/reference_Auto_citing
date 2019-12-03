@@ -114,7 +114,7 @@ function replace_text(text,index){
 function insert_references(){
   
   Word.run(function (context) {
-    var ref_array = [];
+    var ref_array = {};
     for(var i =0; i<input_id_list.length; i++){
       var author = document.getElementById("author_"+input_id_list[i].toString()).value;
       var name = document.getElementById("name_"+input_id_list[i].toString()).value;
@@ -122,6 +122,7 @@ function insert_references(){
       var publised_in = document.getElementById("publish_"+input_id_list[i].toString()).value;
       var pages = document.getElementById("page_"+input_id_list[i].toString()).value;
       var year = document.getElementById("year_"+input_id_list[i].toString()).value;
+      var keyword = document.getElementById("keyword_"+input_id_list[i].toString()).value;
       var ref_string = "";
       
       for(var j=0; j<author_list.length; j++){
@@ -135,7 +136,8 @@ function insert_references(){
       } 
       
       ref_string += '"' + name + '," in ' + publised_in + ", " + year + ". pp. " + pages +"."
-      ref_array.push(ref_string) ;
+      ref_array[input_id_list[i]] = [ref_string] ;
+      ref_array[input_id_list[i]].push(keyword);
       localStorage.myArrData=JSON.stringify(ref_array);
     }
 
