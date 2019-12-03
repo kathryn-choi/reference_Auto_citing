@@ -22,17 +22,16 @@ function finishedList() {
             if(input_dict[input_id_list[j]][2] == i){
                 if(ref_array[input_id_list[j]][1].length == 0){
                     $(wrapper).append(
-                    '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' + (i+1).toString() + '\')">\
-                    <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[j]][0]+ '</span>\
+                    '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-l " style = "width:300px;">\
+                    ['+(i+1).toString()+']<br>'+ref_array[input_id_list[j]][0]+ '\
                     </div>');
                 }
                 else{
                     $(wrapper).append(
-                    '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' +  (i+1).toString() + '\')">\
-                    <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[j]][0] + '<br>Keyword : '+ref_array[input_id_list[j]][1] + '</span>\
+                    '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-l" style = "width:300px;">\
+                    ['+(i+1).toString()+']<br>'+ref_array[input_id_list[j]][0] + '<br>Keyword : '+ref_array[input_id_list[j]][1] + '\
                 </div>');
                 }
-                //documentBody.insertParagraph("["+(i+1).toString() +"] " + ref_array[input_id_list[j]][0],"End");
             }
         }
     }

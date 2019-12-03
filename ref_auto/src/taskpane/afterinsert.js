@@ -18,8 +18,7 @@ Office.initialize = function () {
     }
    
     // Assign event handlers and other initialization logic.
-    document.getElementById("rearrange").onclick = test;
-    document.getElementById("final_button").onclick = finish;
+    document.getElementById("final_button").onclick = test;
     insertRefList();
 };
 var x = 1;
@@ -35,14 +34,14 @@ function insertRefList() {
           console.log(ref_array[input_id_list[i]][1].length);
             if(ref_array[input_id_list[i]][1].length == 0){
               $(wrapper).append(
-                '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' + (i+1).toString() + '\')">\
-                <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[i]][0]+ '</span>\
+                '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-l " style = "width:300px;" onclick ="insert_num(\'' + (i+1).toString() + '\')">\
+                <span class="ms-Button-label">['+(i+1).toString()+']<br>'+ref_array[input_id_list[i]][0]+ '</span>\
               </div>');
             }
             else{
               $(wrapper).append(
-                '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl" onclick ="insert_num(\'' +  (i+1).toString() + '\')">\
-                <span class="ms-Button-label">['+(i+1).toString()+']'+ref_array[input_id_list[i]][0] + '<br>Keyword : '+ref_array[input_id_list[i]][1] + '</span>\
+                '<div role="button" id="ref_'+(i+1).toString + '" class="ms-welcome__action ms-Button ms-Button--hero ms-font-l" style = "width:300px;" onclick ="insert_num(\'' +  (i+1).toString() + '\')">\
+                <span class="ms-Button-label">['+(i+1).toString()+']<br>'+ref_array[input_id_list[i]][0] + '<br>Keyword : '+ref_array[input_id_list[i]][1] + '</span>\
               </div>');
             }
         }
